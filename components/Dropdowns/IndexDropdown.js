@@ -27,7 +27,7 @@ const IndexDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        Demo Pages
+        Menu
       </a>
       <div
         ref={popoverDropdownRef}
@@ -41,7 +41,7 @@ const IndexDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Admin Layout
+          {/* Admin Layout */}
         </span>
         <Link href="/admin/dashboard">
           <a
@@ -89,7 +89,7 @@ const IndexDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Auth Layout
+          {/* Auth Layout */}
         </span>
         <Link href="/auth/login">
           <a
@@ -117,7 +117,7 @@ const IndexDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          No Layout
+          {/* No Layout */}
         </span>
         <Link href="/landing">
           <a
