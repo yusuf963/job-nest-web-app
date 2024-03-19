@@ -280,7 +280,7 @@ export default function Sidebar() {
                   className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                 >
                   <i className="fab fa-css3-alt mr-2 text-blueGray-300 text-base"></i>
-                  CSS Components
+                  Career path 
                 </a>
               </li>
 
