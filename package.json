@@ -2,7 +2,7 @@
   "name": "jobtal-web-app",
   "homepage": "https://demos.creative-tim.com/notus-nextjs",
   "version": "1.1.0",
-  "description": "Notus NextJS - A free Tailwind CSS, NextJS and React Ui Kit and Admin by Creative Tim.",
+  "description": "Jobtal - A free platform for posting and finding jobs, developed by Team-128.",
   "repository": "https://github.com/creativetimofficial/notus-nextjs",
   "license": "MIT",
   "dependencies": {
