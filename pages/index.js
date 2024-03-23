@@ -1,12 +1,19 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import en from '../config/locales/en.json'
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import useFetch from '../service/apiClient';
 
 export default function Index() {
+  const { data, loading, error, getData } = useFetch();
+
+  useEffect(() => {
+    getData('http://localhost:5000/jobpost');
+  }, []);
+  console.log({ data })
   return (
     <>
       <IndexNavbar fixed />

@@ -1,14 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
-
-// layout for page
-
+import useFetch from "service/apiClient";
 import Auth from "layouts/Auth.js";
+import Alert from "components/Alert";
 
 export default function Login() {
+
+  const { data, loading, error, postData } = useFetch();
+  const [userFormData, setUserFormData] = useState({});
+  const [isDataFetched, setIsDataFetched] = useState(false);
+  const router = useRouter();
+
+
+  const handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    setUserFormData({
+      ...userFormData,
+      [name]: value
+    });
+  }
+  const handleLoginUser = async () => {
+    postData('http://localhost:5000/login', userFormData);
+    setIsDataFetched(true)
+  };
+
+  if (isDataFetched && typeof window !== 'undefined' && !error) {
+    localStorage?.setItem('token', data?.token)
+    setTimeout(() => {
+      router.push('/admin/dashboard');
+    }, 800);
+  }
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
+        {loading && <Alert level={'info'} title={'Loading data!'} subTitle={'operation will finish soon!'} />}
+        {error && <Alert level={'fail'} title={'Oops!'} subTitle={'Something went wrong, please try again!'} />}
+        {data && <Alert level={'success'} title={'Yaay!'} subTitle={'correct credentials! redirecting to your dashnboard...'} />}
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
@@ -19,13 +51,6 @@ export default function Login() {
                   </h6>
                 </div>
                 <div className="btn-wrapper text-center">
-                  <button
-                    className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                    <img alt="..." className="w-5 mr-1" src="/img/github.svg" />
-                    Github
-                  </button>
                   <button
                     className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                     type="button"
@@ -50,6 +75,8 @@ export default function Login() {
                     </label>
                     <input
                       type="email"
+                      name="email"
+                      onChange={handleInputChange}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
                     />
@@ -64,6 +91,8 @@ export default function Login() {
                     </label>
                     <input
                       type="password"
+                      name="password"
+                      onChange={handleInputChange}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
                     />
@@ -85,6 +114,7 @@ export default function Login() {
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
+                      onClick={handleLoginUser}
                     >
                       Sign In
                     </button>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -7,7 +7,20 @@ import UserDropdown from "components/Dropdowns/UserDropdown.js";
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+  const [isLoggedin, setIsLoggedin] = useState(null)
   const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token'); // this cause  run time error  on mobile siomulator
+      if (!token) setIsLoggedin(false)
+      if (token) setIsLoggedin(true)
+    }
+  }, [])
+  const handleLogOut = () => {
+    localStorage.removeItem('token');
+  };
+
   return (
     <>
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -207,6 +220,19 @@ export default function Sidebar() {
                 </Link>
               </li>
 
+              {isLoggedin && <li className="items-center">
+                <Link href="/auth/login">
+                  <a
+                    href="#pablo"
+                    onClick={handleLogOut}
+                    className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                  >
+                    <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
+                    Logout
+                  </a>
+                </Link>
+              </li>}
+
               <li className="items-center">
                 <Link href="/auth/register">
                   <a
@@ -280,7 +306,7 @@ export default function Sidebar() {
                   className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold"
                 >
                   <i className="fab fa-css3-alt mr-2 text-blueGray-300 text-base"></i>
-                  Career path 
+                  Career path
                 </a>
               </li>
 
