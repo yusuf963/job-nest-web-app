@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Navbar from "components/Navbars/AuthNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import useFetch from '../service/apiClient';
+// import useUserAuth from '../service/userAuth';
 
 export default function Profile() {
+
+  const { data, loading, error, getData } = useFetch();
+  // const { id } = useUserAuth;
+
+  useEffect(() => {
+    getData('http://localhost:5000/user');
+  }, []);
+
   return (
     <>
       <Navbar transparent />
@@ -104,7 +114,7 @@ export default function Profile() {
                   </div>
                   <div className="mb-2 text-blueGray-600 mt-10">
                     <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                    Solution Manager - Team-128 Officer
+                    Solution Manager - Kilimanjaro Team Officer
                   </div>
                   <div className="mb-2 text-blueGray-600">
                     <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>

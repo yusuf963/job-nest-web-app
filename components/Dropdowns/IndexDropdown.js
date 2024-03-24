@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { createPopper } from "@popperjs/core";
 
 const IndexDropdown = () => {
-  // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
+  const [isLoggedin, setIsLoggedin] = useState(null)
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
@@ -15,6 +15,16 @@ const IndexDropdown = () => {
   };
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
+  };
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token'); // this cause  run time error  on mobile siomulator
+      if (!token) setIsLoggedin(false)
+      if (token) setIsLoggedin(true)
+    }
+  }, [])
+  const handleLogOut = () => {
+    localStorage.removeItem('token');
   };
   return (
     <>
@@ -139,6 +149,17 @@ const IndexDropdown = () => {
             Profile
           </a>
         </Link>
+        {isLoggedin && <Link href="/auth/login">
+          <a
+            onClick={handleLogOut}
+            href="#pablo"
+            className={
+              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            }
+          >
+            Logout
+          </a>
+        </Link>}
       </div>
     </>
   );

@@ -149,7 +149,7 @@ export default function Footer() {
                   href="https://www.creative-tim.com?ref=nnjs-footer"
                   className="text-blueGray-500 hover:text-blueGray-800"
                 >
-                  by team-128
+                  by Kilimanjaro Team
                 </a>
                 .
               </div>

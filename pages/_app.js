@@ -40,7 +40,7 @@ export default class MyApp extends App {
 
 * Tailwind Starter Kit Page: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/presentation
 
-* Coded by Team-128
+* Coded by Kilimanjaro Team
 
 =========================================================
 
@@ -70,7 +70,7 @@ export default class MyApp extends App {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <title>Jobtal by team-128</title>
+          <title>Jobtal by Kilimanjaro Team</title>
           <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
         </Head>
         <Layout>
