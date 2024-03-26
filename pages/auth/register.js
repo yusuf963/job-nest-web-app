@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import Auth from "layouts/Auth.js";
 import useFetch from "service/apiClient";
+import apiEndpoints from 'config/api-endpoints';
+
 
 export default function Register() {
   const { data, loading, error, postData } = useFetch();
@@ -19,7 +21,7 @@ export default function Register() {
     });
   }
   const handleRegisterUser = () => {
-    postData('http://localhost:5000/register', userFormData);
+    postData(apiEndpoints.registerBaseApiUrl, userFormData);
   };
   return (
     <>
@@ -39,7 +41,9 @@ export default function Register() {
                     type="button"
                   >
                     <img alt="..." className="w-5 mr-1" src="/img/google.svg" />
-                    Google
+                    <a href={apiEndpoints.googleAuthApiUrl}>
+                      Google
+                    </a>
                   </button>
                 </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />

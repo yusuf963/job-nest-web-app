@@ -6,23 +6,32 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+
+const truncateText = (text, maxLength) => {
+  if (text.length <= maxLength) {
+    return text;
+  } else {
+    return text.substring(0, maxLength) + '...';
+  }
+};
+
 export default function CourseCard(props) {
-  const { title, discription } = props.course;
+  const { title, description } = props.course;
 
   return (
-    <Card sx={{ maxWidth: 300, height: '460px', marginLeft: '16px', marginBottom: '16px' }}>
-      <CardMedia
+    <Card sx={{ maxHeight: 250, maxWidth: 300, marginLeft: '16px', marginBottom: '16px' }}>
+      {/* <CardMedia
         component="img"
         alt="Course image"
-        height="100"
+        maxHeight="50"
         image="/img/sketch.jpg"
-      />
+      /> */}
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {discription}
+          {truncateText(description, 100)}
         </Typography>
       </CardContent>
       <CardActions>

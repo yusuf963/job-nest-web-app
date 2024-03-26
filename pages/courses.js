@@ -1,10 +1,12 @@
-// import React from "react";
+import React, { useState, useEffect } from 'react';
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import Footer from "components/Footers/Footer.js";
 import CourseCard from '../components/Courses/CourseCard'
+import Footer from "components/Footers/Footer.js";
 
-import React, { useState } from 'react';
+import useFetch from "service/apiClient";
+import apiEndpoints from 'config/api-endpoints';
+
 
 const coursesData = [
     { id: 1, title: 'Arabic teacher', discription: " compiled client and server successfully in 55 ms (967 modules", category: 'Category A' },
@@ -22,6 +24,12 @@ const CoursesPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
 
+    const { data, loading, error, getData } = useFetch();
+
+    useEffect(() => {
+        getData(apiEndpoints.coursesBaseApiUrl)
+    }, [])
+
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
@@ -30,7 +38,7 @@ const CoursesPage = () => {
         setSelectedCategory(category);
     };
 
-    const filteredCourses = coursesData.filter((course) => {
+    const filteredCourses = data?.allCourses?.filter((course) => {
         return (
             course.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
             (selectedCategory === 'All' || course.category === selectedCategory)
@@ -62,7 +70,7 @@ const CoursesPage = () => {
                     </select>
                     <div className="flex flex-wrap mt-20">
 
-                        {filteredCourses.map((course) => (
+                        {filteredCourses?.map((course) => (
                             <CourseCard key={course.id} course={course} />
                         ))}
                     </div>

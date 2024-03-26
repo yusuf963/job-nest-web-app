@@ -53,24 +53,24 @@ const IndexDropdown = () => {
         >
           {/* Admin Layout */}
         </span>
-        <Link href="/job">
+        <Link href="/jobs">
           <a
             href="#pablo"
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
             }
           >
-            Job
+            Search jobs
           </a>
         </Link>
-        <Link href="/course">
+        <Link href="/courses">
           <a
             href="#pablo"
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
             }
           >
-            Course
+            Courses
           </a>
         </Link>
         <Link href="/admin/dashboard">

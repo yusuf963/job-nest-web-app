@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // components
 import Input from "components/Input";
@@ -6,9 +6,11 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import JobPostCard from "components/JobItems/index"
 
 import Footer from "components/Footers/Footer.js";
-import { Fragment, useState } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, } from '@heroicons/react/20/solid'
+import { Disclosure } from '@headlessui/react'
+import { MinusIcon, PlusIcon, } from '@heroicons/react/20/solid'
+
+import useFetch from "service/apiClient";
+import apiEndpoints from 'config/api-endpoints';
 
 
 const sortOptions = [
@@ -113,7 +115,12 @@ function classNames(...classes) {
 
 export default function Landing() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const { data, loading, error, getData } = useFetch();
 
+  useEffect(() => {
+    getData(apiEndpoints.jobsBaseApiUrl)
+  }, [])
+  console.log({ data })
   return (
     <>
       <IndexNavbar fixed />
@@ -166,7 +173,7 @@ export default function Landing() {
         </form>
         <div className="container mx-auto py-12">
           <h2 className="text-2xl font-medium mb-8">Open Positions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-61">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             {jobs.map((job) => (
               <JobPostCard key={job.title} job={job} />
             ))}
