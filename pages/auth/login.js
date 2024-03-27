@@ -4,6 +4,7 @@ import Link from "next/link";
 import useFetch from "service/apiClient";
 import Auth from "layouts/Auth.js";
 import Alert from "components/Alert";
+import apiEndpoints from 'config/api-endpoints';
 
 export default function Login() {
 
@@ -24,7 +25,7 @@ export default function Login() {
     });
   }
   const handleLoginUser = async () => {
-    postData('http://localhost:5000/login', userFormData);
+    postData(apiEndpoints.loginBaseApiUrl, userFormData);
     setIsDataFetched(true)
   };
 
@@ -56,7 +57,10 @@ export default function Login() {
                     type="button"
                   >
                     <img alt="..." className="w-5 mr-1" src="/img/google.svg" />
-                    Google
+                    <a href={apiEndpoints.googleAuthApiUrl}>
+
+                      Google
+                    </a>
                   </button>
                 </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
