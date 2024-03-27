@@ -23,6 +23,7 @@ const coursesData = [
 const CoursesPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const [isArabic, setIsArabic] = useState(false);
 
     const { data, loading, error, getData } = useFetch();
 
@@ -44,6 +45,13 @@ const CoursesPage = () => {
             (selectedCategory === 'All' || course.category === selectedCategory)
         );
     });
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const result = localStorage.getItem('language');
+            setIsArabic(result === 'ar');
+        }
+    }, [isArabic])
 
     return (
         <>

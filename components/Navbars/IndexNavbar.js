@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
+import SwitchLabels from '../Switch'
 
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -15,7 +16,7 @@ export default function Navbar(props) {
                 className="text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 href="#pablo"
               >
-              Jobtal
+                Jobtal
               </a>
             </Link>
             <button
@@ -45,6 +46,9 @@ export default function Navbar(props) {
               </li>
             </ul>
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
+              <li className="flex items-center">
+                <SwitchLabels />
+              </li>
               <li className="flex items-center">
                 <IndexDropdown />
               </li>

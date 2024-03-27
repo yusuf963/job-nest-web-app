@@ -1,19 +1,28 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React, { useEffect } from "react";
 import Link from "next/link";
-import en from '../config/locales/en.json'
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import useFetch from '../service/apiClient';
+import { getLocale } from '../service/utility';
 
 export default function Index() {
   const { data, loading, error, getData } = useFetch();
+  const [locale, setLocale] = React.useState('en');
+
+
 
   useEffect(() => {
+    const storedLanguage = localStorage.getItem('language');
+    if (storedLanguage) {
+      setLocale(storedLanguage);
+    }
     getData('http://localhost:5000/jobpost');
   }, []);
-  console.log({ data })
+
+  const localeData = getLocale(locale);
+
   return (
     <>
       <IndexNavbar fixed />
@@ -22,10 +31,10 @@ export default function Index() {
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
               <h2 className="font-semibold text-4xl text-blueGray-600">
-                {en.homepage_hero_title}
+                {localeData.homepage_hero_title}
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
-                {en.homepage_hero_text}
+                {localeData.homepage_hero_text}
               </p>
               <div className="mt-12">
                 <a
@@ -33,14 +42,14 @@ export default function Index() {
                   target="_blank"
                   className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
                 >
-                  Search Job
+                  {localeData.cta_search_job_button_text}
                 </a>
                 <a
                   href="/auth/register"
                   className="github-star ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
                   target="_blank"
                 >
-                  Register
+                  {localeData.cta_register_button_text}
                 </a>
               </div>
             </div>
@@ -95,7 +104,7 @@ export default function Index() {
                     ></polygon>
                   </svg>
                   <h4 className="text-xl font-bold text-white">
-                    Great for your awesome career
+                    {localeData.great_for_your_awesome_career}
                   </h4>
                   <p className="text-md font-light mt-2 text-white">
                     Putting together a page has never been easier than matching
@@ -116,11 +125,10 @@ export default function Index() {
                         <i className="fas fa-sitemap"></i>
                       </div>
                       <h6 className="text-xl mb-1 font-semibold">
-                        Find job
+                        {localeData.find_job}
                       </h6>
                       <p className="mb-4 text-blueGray-500">
-                        Notus NextJS comes with a huge number of Fully Coded CSS
-                        components.
+                        {localeData.find_job_text}
                       </p>
                     </div>
                   </div>
@@ -130,11 +138,10 @@ export default function Index() {
                         <i className="fas fa-drafting-compass"></i>
                       </div>
                       <h6 className="text-xl mb-1 font-semibold">
-                        Upskill for growth
+                        {localeData.upskill_for_growth}
                       </h6>
                       <p className="mb-4 text-blueGray-500">
-                        We also feature many dynamic components for React,
-                        NextJS, Vue and Angular.
+                        {localeData.upskill_for_growth_text}
                       </p>
                     </div>
                   </div>
@@ -145,10 +152,9 @@ export default function Index() {
                       <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
                         <i className="fas fa-newspaper"></i>
                       </div>
-                      <h6 className="text-xl mb-1 font-semibold">Post jobs</h6>
+                      <h6 className="text-xl mb-1 font-semibold">{localeData.post_jobs}</h6>
                       <p className="mb-4 text-blueGray-500">
-                        This extension also comes with 3 sample pages. They are
-                        fully coded so you can start working instantly.
+                        {localeData.post_jobs_text}
                       </p>
                     </div>
                   </div>
@@ -158,11 +164,10 @@ export default function Index() {
                         <i className="fas fa-file-alt"></i>
                       </div>
                       <h6 className="text-xl mb-1 font-semibold">
-                        Track progress
+                        {localeData.track_progress}
                       </h6>
                       <p className="mb-4 text-blueGray-500">
-                        Built by developers for developers. You will love how
-                        easy is to to work with Notus NextJS.
+                        {localeData.track_progress_text}
                       </p>
                     </div>
                   </div>
@@ -420,13 +425,10 @@ export default function Index() {
                   <i className="fas fa-file-alt text-xl"></i>
                 </div>
                 <h3 className="text-3xl font-semibold">
-                  Build Your CV
+                  {localeData.build_your_cv_title}
                 </h3>
                 <p className="mt-4 text-lg leading-relaxed text-blueGray-500">
-                  This extension comes a lot of fully coded examples that help
-                  you get started faster. You can adjust the colors and also the
-                  programming language. You can change the text and images and
-                  you're good to go.
+                  {localeData.build_your_cv_text}
                 </p>
                 <ul className="list-none mt-6">
                   <li className="py-2">
@@ -491,11 +493,9 @@ export default function Index() {
 
         <div className="justify-center text-center flex flex-wrap mt-24">
           <div className="w-full md:w-6/12 px-12 md:px-4">
-            <h2 className="font-semibold text-4xl">Success Story</h2>
+            <h2 className="font-semibold text-4xl">{localeData.homepage_sucess_story_title}</h2>
             <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
-              Notus NextJS is a completly new product built using our past
-              experience in web templates. Take the examples we made for you and
-              start playing with them.
+              {localeData.homepage_sucess_story_text}
             </p>
           </div>
         </div>
@@ -564,24 +564,10 @@ export default function Index() {
                 <i className="fas fa-code-branch text-xl"></i>
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal text-white">
-                Our aim
+                {localeData.our_aim_title}
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-400">
-                Since{" "}
-                <a
-                  href="https://tailwindcss.com/?ref=creative"
-                  className="text-blueGray-300"
-                  target="_blank"
-                >
-                  Tailwind CSS
-                </a>{" "}
-                is a project we wanted to continue this movement
-                too. You can give this version a try to feel the design and also
-                test the quality of the code!
-              </p>
-              <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-400">
-                Get it free on Github and please help us spread the news with a
-                Star!
+                {localeData.aim_text}
               </p>
               <a
                 href="https://github.com/creativetimofficial/notus-nextjs?ref=nnjs-index"
@@ -629,11 +615,10 @@ export default function Index() {
                 </span>
               </p>
               <h3 className="font-semibold text-3xl">
-                Do you love what we do!
+                {localeData.our_work_title}
               </h3>
               <p className="text-blueGray-500 text-lg leading-relaxed mt-4 mb-4">
-                Connect with us, and lets join force and work together. for better oppertunity
-                we love to hear from you!
+                {localeData.our_work_text}
               </p>
               <div className="sm:block flex flex-col mt-10">
                 <a
