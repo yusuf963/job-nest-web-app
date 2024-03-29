@@ -6,7 +6,9 @@ const dev = {
     googleAuthApiUrl: "http://localhost:5000/auth/google",
     loginBaseApiUrl: "http://localhost:5000/login",
     registerBaseApiUrl: "http://localhost:5000/register",
-    userCrudBaseApiUrl: "http://localhost:5000/user/"
+    userCrudBaseApiUrl: "http://localhost:5000/user/",
+    jobPostCrudBaseApiUrl: "http://localhost:5000/jobpost/",
+    courseCrudBaseApiUrl: "http://localhost:5000/courses/"
 };
 const prod = {
     baseApiUrl: "https://job-nest-api.onrender.com/",
@@ -15,7 +17,9 @@ const prod = {
     googleAuthApiUrl: "https://job-nest-api.onrender.com/auth/google",
     loginBaseApiUrl: "https://job-nest-api.onrender.com//login",
     registerBaseApiUrl: "https://job-nest-api.onrender.com/register",
-    userCrudBaseApiUrl: "https://job-nest-api.onrender.com/user/"
+    userCrudBaseApiUrl: "https://job-nest-api.onrender.com/user/",
+    jobPostCrudBaseApiUrl: "https://job-nest-api.onrender.com/jobpost/",
+    courseCrudBaseApiUrl: "https://job-nest-api.onrender.com/courses/"
 };
 
 let apiEndpoints;
