@@ -120,7 +120,6 @@ export default function Landing() {
   useEffect(() => {
     getData(apiEndpoints.jobsBaseApiUrl)
   }, [])
-  console.log({ data })
   return (
     <>
       <IndexNavbar fixed />

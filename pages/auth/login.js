@@ -31,17 +31,18 @@ export default function Login() {
 
   if (isDataFetched && typeof window !== 'undefined' && !error) {
     localStorage?.setItem('token', data?.token)
-    setTimeout(() => {
-      router.push('/admin/dashboard');
-    }, 800);
+    localStorage?.setItem('loggedinUser', JSON.stringify(data?.loggedinUser))
   }
+  data && setTimeout(() => {
+    router.push('/profile');
+  }, 800);
 
   return (
     <>
       <div className="container mx-auto px-4 h-full">
         {loading && <Alert level={'info'} title={'Loading data!'} subTitle={'operation will finish soon!'} />}
         {error && <Alert level={'fail'} title={'Oops!'} subTitle={'Something went wrong, please try again!'} />}
-        {data && <Alert level={'success'} title={'Yaay!'} subTitle={'correct credentials! redirecting to your dashnboard...'} />}
+        {data && <Alert level={'success'} title={'Yaay!'} subTitle={'correct credentials! redirecting to your dashboard...'} />}
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
