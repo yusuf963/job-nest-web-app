@@ -66,11 +66,18 @@ const filters = [
 
 const jobs = [
   {
-    title: 'Software Engineer',
+    title: 'Finance manager',
     company: 'Awesome Company',
     location: 'Remote',
     description: '...',
-    tags: ['JavaScript', 'React', 'Node.js'],
+    tags: ['Accounting', 'Number', 'Communication'],
+  },
+  {
+    title: 'Gardener',
+    company: 'Awesome Company',
+    location: 'On-site',
+    description: '...',
+    tags: ['Chopping', 'Driving', 'planting'],
   },
   {
     title: 'Software Engineer',
@@ -80,11 +87,11 @@ const jobs = [
     tags: ['JavaScript', 'React', 'Node.js'],
   },
   {
-    title: 'Software Engineer',
+    title: 'Driver',
     company: 'Awesome Company',
-    location: 'Remote',
+    location: 'On-site',
     description: '...',
-    tags: ['JavaScript', 'React', 'Node.js'],
+    tags: ['Licence', 'eye sight'],
   },
   {
     title: 'Software Engineer',
@@ -94,18 +101,11 @@ const jobs = [
     tags: ['JavaScript', 'React', 'Node.js'],
   },
   {
-    title: 'Software Engineer',
+    title: 'Arabic teacher',
     company: 'Awesome Company',
-    location: 'Remote',
+    location: 'On-site',
     description: '...',
-    tags: ['JavaScript', 'React', 'Node.js'],
-  },
-  {
-    title: 'Software Engineer',
-    company: 'Awesome Company',
-    location: 'Remote',
-    description: '...',
-    tags: ['JavaScript', 'React', 'Node.js'],
+    tags: ['Native arabic', 'Communication', 'Teaching skills'],
   },
 ]
 
