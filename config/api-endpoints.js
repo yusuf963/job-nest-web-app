@@ -15,7 +15,7 @@ const prod = {
     coursesBaseApiUrl: "https://job-nest-api.onrender.com/courses",
     jobsBaseApiUrl: "https://job-nest-api.onrender.com/jobpost",
     googleAuthApiUrl: "https://job-nest-api.onrender.com/auth/google",
-    loginBaseApiUrl: "https://job-nest-api.onrender.com//login",
+    loginBaseApiUrl: "https://job-nest-api.onrender.com/login",
     registerBaseApiUrl: "https://job-nest-api.onrender.com/register",
     userCrudBaseApiUrl: "https://job-nest-api.onrender.com/user/",
     jobPostCrudBaseApiUrl: "https://job-nest-api.onrender.com/jobpost/",

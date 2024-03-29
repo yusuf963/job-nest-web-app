@@ -39,12 +39,12 @@ export default function CardSettings() {
     localStorage?.setItem('loggedinUser', JSON.stringify(data))
   }
 
-  const renderHrefAndButtonText = user?.role === 'siteAdmin' ? {
+  const renderHrefAndButtonText = user?.role === 'applicationAdmin' ? {
     href: '/courses',
     buttonText: 'Create course'
-  } : user?.role === 'jobAdmin' ?
+  } : user?.role === 'jobPoster' ?
     {
-      href: '/courses',
+      href: '/jobs',
       buttonText: 'Create Job'
     } : {
       href: '/profile',
