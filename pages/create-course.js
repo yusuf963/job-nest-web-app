@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import useFetch from "service/apiClient";
 import apiEndpoints from 'config/api-endpoints';
-import { CategoriesEnum, jobTypesEnum, workplaceTypesEnum } from '../service/constants'
+import { CategoriesEnum, proficiencyEnum } from '../service/constants'
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
@@ -10,9 +10,8 @@ import Alert from "components/Alert";
 
 export default function Register() {
   const { data, loading, error, postData } = useFetch();
-  const [jobFormData, setJobFormData] = useState({
-    jobType: 'fulltime',
-    workplaceType: "remote"
+  const [courseFormData, setCourseFormData] = useState({
+    level: 'beginner',
   });
 
   const handleInputChange = (event) => {
@@ -20,26 +19,29 @@ export default function Register() {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    setJobFormData({
-      ...jobFormData,
+    setCourseFormData({
+      ...courseFormData,
       [name]: value
     });
   }
 
 
   const handleRegisterUser = () => {
-    postData(apiEndpoints.jobPostCrudBaseApiUrl, jobFormData);
+    postData(apiEndpoints.courseCrudBaseApiUrl, courseFormData);
   };
   return (
     <>
-      <IndexNavbar fixed />
+      <IndexNavbar />
       <div className="flex content-center mt-20 mb-8 items-center justify-center h-full">
         <div className="w-full lg:w-6/12 px-4">
+        {loading && <Alert level={'info'} title={'Loading data!'} subTitle={'operation will finish soon!'} />}
+        {error && <Alert level={'fail'} title={'Oops!'} subTitle={'Something went wrong, please try again!'} />}
+        {data && <Alert level={'success'} title={'Yaay!'} subTitle={'Job created successfully'} />}
           <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
             <div className="rounded-t mb-0 px-6 py-6">
               <div className="text-center mb-3">
                 <h6 className="text-blueGray-500 text-sm font-bold">
-                  Create job post
+                  Create Course
                 </h6>
               </div>
               <div className="btn-wrapper text-center">
@@ -51,50 +53,17 @@ export default function Register() {
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="jobTitle"
+                    htmlFor="title"
                   >
-                    Job Title
+                    Course Title
                   </label>
                   <input
                     type="text"
-                    id="jobTitle"
+                    id="title"
                     name="title"
                     onChange={handleInputChange}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Job Title"
-                  />
-                </div>
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="companyName"
-                  >
-                    Company Name
-                  </label>
-                  <input
-                    type="text"
-                    id="companyName"
-                    name="companyName"
-                    onChange={handleInputChange}
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Company Name"
-                  />
-                </div>
-
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="location"
-                  >
-                    Location
-                  </label>
-                  <input
-                    type="text"
-                    id="location"
-                    name="location"
-                    onChange={handleInputChange}
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Location"
+                    placeholder="course title"
                   />
                 </div>
 
@@ -118,156 +87,102 @@ export default function Register() {
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="otherDescription"
+                    htmlFor="courseLink"
                   >
-                    Other description
+                    course link
                   </label>
                   <input
                     type="text"
-                    id="otherDescription"
-                    name="otherDescription"
+                    id="courseLink"
+                    name="courseLink"
                     onChange={handleInputChange}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="other description"
+                    placeholder="course link"
                   />
                 </div>
 
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="benefits"
+                    htmlFor="duration"
                   >
-                    Benefits
+                    duration
                   </label>
                   <input
                     type="text"
-                    id="benefits"
-                    name="benefits"
+                    id="duration"
+                    name="duration"
                     onChange={handleInputChange}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="benefits"
+                    placeholder="duration"
                   />
                 </div>
 
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="requirements"
+                    htmlFor="prerequisites"
                   >
-                    requirements
+                    prerequisites
                   </label>
                   <input
                     type="text"
-                    id="requirements"
-                    name="requirements"
+                    id="prerequisites"
+                    name="prerequisites"
                     onChange={handleInputChange}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="requirements"
+                    placeholder="prerequisites"
                   />
                 </div>
 
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="responsibilities"
+                    htmlFor="skillsCovered"
                   >
-                    responsibilities
+                    skills Covered
                   </label>
                   <input
                     type="text"
-                    id="responsibilities"
-                    name="responsibilities"
+                    id="skillsCovered"
+                    name="skillsCovered"
                     onChange={handleInputChange}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="responsibilities"
+                    placeholder="skillsCovered"
                   />
                 </div>
 
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="qualifications"
+                    htmlFor="instructor"
                   >
-                    qualifications
+                    instructor
                   </label>
                   <input
                     type="text"
-                    id="qualifications"
-                    name="qualifications"
+                    id="instructor"
+                    name="instructor"
                     onChange={handleInputChange}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="qualifications"
+                    placeholder="instructor"
                   />
                 </div>
 
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="yearsOfWorkExperience"
+                    htmlFor="level"
                   >
-                    years of work experience
-                  </label>
-                  <input
-                    type="text"
-                    id="yearsOfWorkExperience"
-                    name="yearsOfWorkExperience"
-                    onChange={handleInputChange}
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="years of work experience"
-                  />
-                </div>
-                {loading && <Alert level={'info'} title={'Loading data!'} subTitle={'operation will finish soon!'} />}
-        {error && <Alert level={'fail'} title={'Oops!'} subTitle={'Something went wrong, please try again!'} />}
-        {data && <Alert level={'success'} title={'Yaay!'} subTitle={'Job created successfully'} />}
-
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="salary"
-                  >
-                    salary
-                  </label>
-                  <input
-                    type="text"
-                    id="salary"
-                    name="salary"
-                    onChange={handleInputChange}
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="salary"
-                  />
-                </div>
-
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="jobType"
-                  >
-                    Job Type
+                    Level
                   </label>
                   <select
-                    id="jobType"
-                    name="jobType"
+                    id="level"
+                    name="level"
                     onChange={handleInputChange}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   >
-                    {jobTypesEnum.map((jobType) => <option key={jobType.value} value={jobType.value}>{jobType.title}</option>)}
-                  </select>
-                </div>
-
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="workplaceType"
-                  >
-                    Workplace Type
-                  </label>
-                  <select
-                    id="workplaceType"
-                    name="workplaceType"
-                    onChange={handleInputChange}
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  >
-                    {workplaceTypesEnum.map((workplaceType) => <option key={workplaceType.value} value={workplaceType.value}>{workplaceType.title}</option>)}
+                    {proficiencyEnum.map((level) => <option key={level.value} value={level.title}>{level.title}</option>)}
                   </select>
                 </div>
 
@@ -284,7 +199,7 @@ export default function Register() {
                     onChange={handleInputChange}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   >
-                    {CategoriesEnum.map((category) => <option key={category.value} value={category.value}>{category.title}</option>)}
+                    {CategoriesEnum.map((category) => <option key={category.value} value={category.title}>{category.title}</option>)}
                   </select>
                 </div>
 
@@ -294,7 +209,7 @@ export default function Register() {
                     type="button"
                     onClick={handleRegisterUser}
                   >
-                    Create Job post
+                    Create Course
                   </button>
                 </div>
               </form>
@@ -302,7 +217,7 @@ export default function Register() {
           </div>
         </div>
       </div>
-      < Footer />
+      <Footer />
     </>
   );
 }
